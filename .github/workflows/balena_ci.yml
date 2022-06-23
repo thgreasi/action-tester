@@ -5,18 +5,19 @@ on:
     tags:
       - "*"
 jobs:
-  deploy:
+  deploy-release:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: true
       matrix:
-        fleet: [hello-node, hello-node-pi1]
+        arch: [aarch64]
+        environment: [{ tld: balena-staging.com, token_prop_name: BALENA_STAGING_TOKEN }]
+        fleet: ['thgreasinomembersorg/thgreasinomembersorg/action-tester']
     steps:
       - uses: actions/checkout@v2
-      - uses: balena-io/balena-ci@add-tests
-        name: 'Deploy to thgreasinomembersorg/${{ matrix.fleet }}'
+      - uses: balena-io/balena-ci@master
+        name: 'Deploy to ${{ matrix.environment.tld }}'
         with:
-          balena_token: ${{ secrets.BALENA_STAGING_TOKEN }} 
-          environment: balena-staging.com
-          fleet: 'thgreasinomembersorg/${{ matrix.fleet }}' 
-          create_tag: true
+          balena_token: ${{ secrets[matrix.environment.token_prop_name] }}
+          fleet: ${{ matrix.fleet }}
+          environment: ${{ matrix.environment.tld }}

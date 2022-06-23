@@ -15,7 +15,7 @@ jobs:
         fleet: ['thgreasinomembersorg/action-tester']
     steps:
       - uses: actions/checkout@v2
-      - uses: balena-io/balena-ci@master
+      - uses: balena-io/balena-ci@push-tag
         name: 'Deploy to ${{ matrix.environment.tld }}'
         with:
           balena_token: ${{ secrets[matrix.environment.token_prop_name] }}

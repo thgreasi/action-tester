@@ -2,8 +2,8 @@ name: balenaCloud
 
 on:
   push:
-    branches:
-      - master
+    tags:
+      - "*"
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -14,9 +14,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: balena-io/balena-ci@add-tests
-        name: 'Deploy to miguel/${{ matrix.fleet }}'
+        name: 'Deploy to thgreasinomembersorg/${{ matrix.fleet }}'
         with:
           balena_token: ${{ secrets.BALENA_STAGING_TOKEN }} 
           environment: balena-staging.com
-          fleet: 'miguel/${{ matrix.fleet }}' 
+          fleet: 'thgreasinomembersorg/${{ matrix.fleet }}' 
           create_tag: true

@@ -12,7 +12,7 @@ jobs:
       matrix:
         arch: [aarch64]
         environment: [{ tld: balena-staging.com, token_prop_name: BALENA_STAGING_TOKEN }]
-        fleet: ['thgreasinomembersorg/thgreasinomembersorg/action-tester']
+        fleet: ['thgreasinomembersorg/action-tester']
     steps:
       - uses: actions/checkout@v2
       - uses: balena-io/balena-ci@master
